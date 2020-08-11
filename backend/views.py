@@ -33,3 +33,26 @@ def get_news(request):
     response = requests.get(url)
     print(response.json())
     return HttpResponse("OK")
+
+
+def get_videos(request):
+    search_url = "https://www.googleapis.com/youtube/v3/search"
+
+    videos_url = "https://www.youtube.com/watch?v="
+
+    params = {
+        'part': 'snippet',
+        'q': 'bangladesh',
+        'key': 'AIzaSyDwvNf66Sbjxr8Iou7Z2kEqyNbEFkNTCqU'}
+
+    r = requests.get(search_url, params=params, verify=False)
+
+    #r = requests.get(videos_url, params=params, verify=False)
+    result = r.json()
+    links = []
+    for video in result['items']:
+        links.append(videos_url + video['id']['videoId'])
+
+    # print(r.json())
+    print(links)
+    return HttpResponse("OK")
