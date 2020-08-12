@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'backend'
 ]
 
 MIDDLEWARE = [
@@ -78,8 +79,11 @@ WSGI_APPLICATION = 'world_feed_backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'dcfs7bbgscjknm',
+        'USER': 'iqkcfguxjyswov',
+        'PASSWORD': 'a901f7bf456a4fa4b0b1b44b9f4485ddeeb9a11b7b5b5609a4fc6457589c8c90',
+        'HOST': 'ec2-52-204-20-42.compute-1.amazonaws.com'
     }
 }
 

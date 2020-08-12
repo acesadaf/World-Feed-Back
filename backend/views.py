@@ -20,8 +20,10 @@ news_api_key = "c3677ea6a98b4e13a34afccee2199218"
 def get_tweet(request):
     tweets = []
     for tweet in tweepy.Cursor(api.search, q="#" + "tweeting" + " -filter:retweets", rpp=5, lang="en", tweet_mode="extended").items(1):
-        print(tweet)
-
+        pass
+        # print(tweet)
+    for tweet in tweepy.Cursor(api.search, q='cricket' + " -filter:retweets", geocode="-22.9122,-43.2302,500km").items(2):
+        print(tweet._json['text'])
     return HttpResponse("OK")
 
 
