@@ -26,9 +26,14 @@ SECRET_KEY = 'q_3dk$tmm^ww7=-@$vp(87q23j+nhfi7x9&)zs7bx2s&180m_#'
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    'localhost:3000/'
     'testserver',
     '127.0.0.1'
 ]
+
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',
+)
 
 
 # Application definition
@@ -40,12 +45,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'backend'
+    'backend',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -80,10 +87,10 @@ WSGI_APPLICATION = 'world_feed_backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dcfs7bbgscjknm',
-        'USER': 'iqkcfguxjyswov',
-        'PASSWORD': 'a901f7bf456a4fa4b0b1b44b9f4485ddeeb9a11b7b5b5609a4fc6457589c8c90',
-        'HOST': 'ec2-52-204-20-42.compute-1.amazonaws.com'
+        'NAME': 'dd847gbucii8bf',
+        'USER': 'memdptenobciiv',
+        'PASSWORD': '28af188c4c19a9a406e12e01538fa0370e8af1d48a3d49155e41f6ef682eb0b6',
+        'HOST': 'ec2-34-192-122-0.compute-1.amazonaws.com'
     }
 }
 

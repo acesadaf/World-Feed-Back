@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 import tweepy
 import requests
-
+import json
+from django.http import JsonResponse
 consumer_key = "I7VpkNuclA6KETbxU1fj2IIav"
 consumer_secret = "9GoP6ZEbBRpCEPyBZ4GiWomgvDwBjGnat0iwIJBexMRVvq2pHm"
 access_token = "1007201002930335744-kbdzzTCMrjRZIGq155Teu2MBASozOb"
@@ -16,15 +18,22 @@ news_api_key = "c3677ea6a98b4e13a34afccee2199218"
 
 # Create your views here.
 
-
+@csrf_exempt
 def get_tweet(request):
+    print(request)
+    body = json.loads(request.body)
+    print(body)
     tweets = []
-    for tweet in tweepy.Cursor(api.search, q="#" + "tweeting" + " -filter:retweets", rpp=5, lang="en", tweet_mode="extended").items(1):
-        pass
-        # print(tweet)
-    for tweet in tweepy.Cursor(api.search, q='cricket' + " -filter:retweets", geocode="-22.9122,-43.2302,500km").items(2):
-        print(tweet._json['text'])
-    return HttpResponse("OK")
+    # for tweet in tweepy.Cursor(api.search, q="#" + "tweeting" + " -filter:retweets", rpp=5, lang="en", tweet_mode="extended").items(1):
+    #     pass
+    # print(tweet)
+    for tweet in tweepy.Cursor(api.search, q=" -filter:retweets", geocode="{},{},500km".format(body['lat'], body['lng'])).items(4):
+        print(tweet._json['text'], tweet.user.screen_name)
+        tweets.append({'username': tweet.user.screen_name,
+                       'tweet': tweet._json['text']})
+        print("-----------------")
+        # print(tweet._json['text'])
+    return JsonResponse(tweets, safe=False)
 
 
 def get_news(request):
