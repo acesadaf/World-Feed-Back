@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import django_heroku
 import os
-from secrets import password
+from world_feed_backend.secret import password
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.

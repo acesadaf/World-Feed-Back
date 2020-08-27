@@ -7,11 +7,11 @@ import json
 import reverse_geocoder as rg
 from django.http import JsonResponse
 from backend.models import CountryTweetCache, CityTweetCache
-import secrets
-consumer_key = secrets.consumer_key
-consumer_secret = secrets.consumer_secret
-access_token = secrets.access_token
-access_token_secret = secrets.access_token_secret
+from world_feed_backend.secret import consumer_key, consumer_secret, access_token, access_token_secret
+# consumer_key = secrets.consumer_key
+# consumer_secret = secrets.consumer_secret
+# access_token = secrets.access_token
+# access_token_secret = secrets.access_token_secret
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth, wait_on_rate_limit=True)
