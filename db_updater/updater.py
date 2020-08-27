@@ -13,7 +13,7 @@ def update():
         # print(s.cache_time, datetime.now(timezone.utc))
         delta = datetime.now(timezone.utc) - s.cache_time
         # print(delta.seconds)
-        if (delta.seconds)/60 > 0.5:
+        if (delta.seconds/3600) > 6:
             city, country = s.city, s.country
             entry_to_delete = CityTweetCache.objects.get(
                 city=city, country=country)
@@ -25,7 +25,7 @@ def update():
         # print("here??")
         delta = datetime.now(timezone.utc) - c.cache_time
         # print(delta.seconds)
-        if (delta.seconds)/60 > 0.5:
+        if (delta.seconds/3600) > 6:
             country = c.country
             entry_to_delete = CountryTweetCache.objects.get(country=country)
             entry_to_delete.delete()
@@ -34,6 +34,6 @@ def update():
 def start():
     print("Starting scheduler..")
     scheduler = BackgroundScheduler()
-    scheduler.add_job(func=update, trigger='interval', minutes=0.1)
+    scheduler.add_job(func=update, trigger='interval', minutes=1)
     scheduler.start()
     scheduler_active = True

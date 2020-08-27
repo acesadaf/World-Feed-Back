@@ -7,15 +7,15 @@ import json
 import reverse_geocoder as rg
 from django.http import JsonResponse
 from backend.models import CountryTweetCache, CityTweetCache
-consumer_key = "I7VpkNuclA6KETbxU1fj2IIav"
-consumer_secret = "9GoP6ZEbBRpCEPyBZ4GiWomgvDwBjGnat0iwIJBexMRVvq2pHm"
-access_token = "1007201002930335744-kbdzzTCMrjRZIGq155Teu2MBASozOb"
-access_token_secret = "myKU6wuYz3ync8aSTfbpD3hvR0I51OjCAB4aI4qyiRHV9"
+import secrets
+consumer_key = secrets.consumer_key
+consumer_secret = secrets.consumer_secret
+access_token = secrets.access_token
+access_token_secret = secrets.access_token_secret
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth, wait_on_rate_limit=True)
 
-news_api_key = "c3677ea6a98b4e13a34afccee2199218"
 
 # Create your views here.
 
@@ -141,36 +141,3 @@ def get_tweet(request):
             tweets = api_fetch_and_cache(body, city, country, "city")
 
     return JsonResponse(tweets, safe=False)
-
-
-def get_news(request):
-    url = ('http://newsapi.org/v2/top-headlines?'
-           'sources=bbc-news&'
-           'apiKey={}'.format(news_api_key))
-
-    response = requests.get(url)
-    print(response.json())
-    return HttpResponse("OK")
-
-
-def get_videos(request):
-    search_url = "https://www.googleapis.com/youtube/v3/search"
-
-    videos_url = "https://www.youtube.com/watch?v="
-
-    params = {
-        'part': 'snippet',
-        'q': 'bangladesh',
-        'key': 'AIzaSyDwvNf66Sbjxr8Iou7Z2kEqyNbEFkNTCqU'}
-
-    r = requests.get(search_url, params=params, verify=False)
-
-    # r = requests.get(videos_url, params=params, verify=False)
-    result = r.json()
-    links = []
-    for video in result['items']:
-        links.append(videos_url + video['id']['videoId'])
-
-    # print(r.json())
-    print(links)
-    return HttpResponse("OK")
