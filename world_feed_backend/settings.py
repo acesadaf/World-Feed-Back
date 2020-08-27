@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import django_heroku
 import os
-from secrets import *
+from secrets import password
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -91,7 +91,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'dd847gbucii8bf',
         'USER': 'memdptenobciiv',
-        'PASSWORD': secrets.password,
+        'PASSWORD': password,
         'HOST': 'ec2-34-192-122-0.compute-1.amazonaws.com'
     }
 }
