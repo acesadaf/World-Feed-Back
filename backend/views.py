@@ -4,10 +4,14 @@ from django.views.decorators.csrf import csrf_exempt
 import tweepy
 import requests
 import json
+import os
 import reverse_geocoder as rg
 from django.http import JsonResponse
 from backend.models import CountryTweetCache, CityTweetCache
-from world_feed_backend.secret import consumer_key, consumer_secret, access_token, access_token_secret
+consumer_key = os.environ["TWITTER_CONSUMER_KEY"]
+consumer_secret = os.environ["TWITTER_CONSUMER_SECRET"]
+access_token = os.environ["TWITTER_ACCESS_TOKEN"]
+access_token_secret = os.environ["TWITTER_ACCESS_TOKEN_SECRET"]
 # consumer_key = secrets.consumer_key
 # consumer_secret = secrets.consumer_secret
 # access_token = secrets.access_token
